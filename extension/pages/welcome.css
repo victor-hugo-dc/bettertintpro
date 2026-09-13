@@ -1,0 +1,895 @@
+/* ==========================================================================
+   TintPro Restyle — pages/welcome.css (home page: /trunk/welcome/)
+   Scope: everything lives under #content_ctl00 (the ASP.NET UpdatePanel that
+   holds the dashboard) so the rest of the app (modals, sidebar) is untouched.
+   The site uses "g-*" utility classes with !important, hence the !important
+   on spacing/colour rules below.
+   ========================================================================== */
+
+:root {
+  --asc-split-left: 1fr;
+  --asc-split-right: 1fr;
+  --asc-list-max: calc(100vh - 250px);
+}
+
+
+/* Everything below is disabled on pages the gate marks off (see common/gate.js) */
+html:not(.asc-off) {
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+#content_ctl00 {
+  font-family: var(--asc-font);
+  color: var(--asc-text);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+#content_ctl00 > .g-pa-15 {
+  padding: 16px 20px 16px !important;
+  container-type: inline-size;
+  container-name: dash;
+}
+
+
+/* --------------------------------------------------------------------------
+   Toolbar: "Display" toggles → pill switches
+   -------------------------------------------------------------------------- */
+#content_ctl00 > .g-pa-15 > .row:first-child {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px !important;
+  font-size: 13px !important;
+}
+
+#content_ctl00 > .g-pa-15 > .row:first-child > .col-lg-6 {
+  flex: 1 1 auto !important;
+  max-width: none !important;
+  width: auto !important;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 !important;
+}
+
+#content_ctl00 > .g-pa-15 > .row:first-child strong {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--asc-muted);
+  margin-right: 4px;
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"] + label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 !important;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--asc-border);
+  background: var(--asc-card);
+  color: var(--asc-muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background .12s, border-color .12s, color .12s;
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"] + label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--asc-border-strong);
+  transition: background .12s;
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"] + label:hover {
+  border-color: var(--asc-border-strong);
+  color: var(--asc-text);
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"]:checked + label {
+  background: var(--asc-accent-soft);
+  border-color: var(--asc-accent-border);
+  color: var(--asc-accent-strong);
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"]:checked + label::before {
+  background: var(--asc-accent);
+}
+
+#content_ctl00 input[type="checkbox"][id^="ck_"]:focus-visible + label {
+  outline: 2px solid var(--asc-accent);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Main grid
+     [ Leads ........................................ ]
+     [ Job Orders        ][|][ Task List              ]
+     [ Phone List ..................................... ]
+   #content_div_left (Leads + Job Orders wrapper) is flattened with
+   display:contents so all four cards are direct grid items.
+   -------------------------------------------------------------------------- */
+#content_ctl00 > .g-pa-15 > .row:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: minmax(0, var(--asc-split-left)) 14px minmax(0, var(--asc-split-right));
+  gap: 16px 0;
+  align-items: stretch; /* Job Orders and Task List always share the row height */
+  margin: 0 !important;
+}
+/* the two big lists: card fills its grid cell, body takes the spare height */
+#content_div_jobs,
+#content_div_tasks {
+  display: flex !important;
+  flex-direction: column;
+}
+#content_div_tasks > .card {
+  flex: 1 1 auto;
+}
+#content_div_jobs .asc-body,
+#content_div_tasks .asc-body {
+  flex: 1 1 auto;
+}
+
+#content_div_left {
+  display: contents !important;
+}
+
+#content_div_web,
+#content_div_jobs,
+#content_div_tasks,
+#content_div_phone {
+  flex: none !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#content_div_web   { order: 1 !important; grid-column: 1 / -1; }
+#content_div_jobs  { order: 2 !important; grid-column: 1; }
+.asc-resizer       { order: 3; grid-column: 2; }
+#content_div_tasks { order: 4 !important; grid-column: 3; }
+#content_div_phone { order: 5 !important; grid-column: 1 / -1; }
+
+/* Non-empty Leads / Phone lists when the row is single-column */
+#content_ctl00 > .g-pa-15 > .row.asc-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+#content_ctl00 > .g-pa-15 > .row.asc-single > *,
+#content_ctl00 > .g-pa-15 > .row.asc-single #content_div_jobs,
+#content_ctl00 > .g-pa-15 > .row.asc-single #content_div_tasks {
+  grid-column: 1 / -1;
+}
+#content_ctl00 > .g-pa-15 > .row.asc-single .asc-resizer {
+  display: none;
+}
+
+/* Drag handle between the two big lists */
+.asc-resizer {
+  align-self: stretch;
+  cursor: col-resize;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+}
+.asc-resizer::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 50%;
+  width: 4px;
+  margin-left: -2px;
+  border-radius: 999px;
+  background: var(--asc-border);
+  transition: background .12s;
+}
+.asc-resizer:hover::before,
+.asc-resizer.is-dragging::before {
+  background: var(--asc-accent);
+}
+body.asc-dragging {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* Narrow content area (small window OR wide sidebar): one column.
+   Queried against the dashboard container so toggling the sidebar re-flows. */
+@container dash (max-width: 899px) {
+  #content_ctl00 > .g-pa-15 > .row:nth-child(2) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  #content_div_jobs,
+  #content_div_tasks {
+    grid-column: 1 / -1 !important;
+  }
+  .asc-resizer {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) {
+  #content_ctl00 > .g-pa-15 {
+    padding: 12px 12px 12px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------------- */
+#content_ctl00 .card {
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+  background: var(--asc-card) !important;
+  border: 1px solid var(--asc-border) !important;
+  border-radius: var(--asc-radius) !important;
+  box-shadow: var(--asc-shadow);
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Card header (rebuilt by dashboard.js into .asc-head) */
+#content_ctl00 .card > header {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: var(--asc-card-head);
+  border-bottom: 1px solid var(--asc-border);
+}
+#content_ctl00 .card.asc-collapsed > header {
+  border-bottom: 0;
+}
+
+.asc-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px 10px 16px;
+  min-height: 52px;
+}
+.asc-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+/* Cards with several filters: title + actions on line 1, filters on line 2 */
+.asc-head--stacked {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.asc-head--stacked .asc-title-wrap { grid-row: 1; grid-column: 1; }
+.asc-head--stacked .asc-actions    { grid-row: 1; grid-column: 2; }
+.asc-head--stacked .asc-tools {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+}
+/* Narrow card: any header stacks (title/actions on line 1, filters on line 2) */
+@container (max-width: 560px) {
+  .asc-head { grid-template-columns: minmax(0, 1fr) auto; }
+  .asc-head .asc-title-wrap { grid-row: 1; grid-column: 1; }
+  .asc-head .asc-actions    { grid-row: 1; grid-column: 2; }
+  .asc-head .asc-tools {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  .asc-collapsed .asc-head .asc-tools { display: none !important; }
+}
+
+.asc-head .asc-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+#content_ctl00 .card .asc-head h2,
+#content_ctl00 .card .asc-head h3 {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  float: none !important;
+  margin: 0 !important;
+  font-family: inherit;
+  font-size: 15px !important;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  color: var(--asc-text-strong) !important;
+  white-space: nowrap;
+}
+
+/* "+" add buttons that live inside the title */
+#content_ctl00 .card .add_button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0 !important;   /* the site's .add_button has 10px padding → off-centre glyph */
+  margin: 0 !important;
+  line-height: 0;
+  border-radius: 6px;
+  vertical-align: middle;
+  color: var(--asc-accent) !important;
+  background: var(--asc-accent-soft);
+  text-decoration: none !important;
+  transition: background .12s;
+}
+#content_ctl00 .card .add_button:hover {
+  background: var(--asc-accent-border);
+}
+#content_ctl00 .card .add_button i {
+  font-size: 13px !important;
+  line-height: 1;
+}
+#content_ctl00 .card .add_button svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
+  display: block;
+  margin: 0;
+}
+#content_ctl00 .card .asc-refresh svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Count badge */
+.asc-count {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.asc-count.asc-count--zero {
+  background: transparent;
+  border: 1px dashed var(--asc-border-strong);
+  color: var(--asc-muted);
+  font-weight: 500;
+}
+
+/* Filter controls (User / Status / Pipeline) */
+.asc-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.asc-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-weight: 500;
+}
+.asc-field > span {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--asc-muted);
+}
+
+#content_ctl00 select.custom-select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 32px !important;
+  width: auto !important;
+  min-width: 120px;
+  max-width: 240px;
+  padding: 0 28px 0 10px !important;
+  margin: 0 !important;
+  font-family: inherit;
+  font-size: 12.5px !important;
+  font-weight: 500;
+  color: var(--asc-text) !important;
+  border: 1px solid var(--asc-border) !important;
+  border-radius: var(--asc-radius-sm) !important;
+  background: var(--asc-card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 9px center !important;
+  background-size: 12px 12px !important;
+  box-shadow: none !important;
+  line-height: 30px;
+  cursor: pointer;
+}
+#content_ctl00 select.custom-select:hover {
+  border-color: var(--asc-border-strong) !important;
+}
+#content_ctl00 select.custom-select:focus {
+  outline: none;
+  border-color: var(--asc-accent) !important;
+  box-shadow: 0 0 0 3px var(--asc-accent-soft) !important;
+}
+/* Pipeline "section header" options: keep them distinguishable without the
+   inline navy background the server sets */
+#content_ctl00 select.custom-select option[style] {
+  background: #eef2ff !important;
+  color: #312e81 !important;
+  font-weight: 700;
+}
+
+/* Leads Open/All radio → segmented control */
+#content_ctl00 #content_rb_active {
+  display: inline-flex !important;
+  width: auto !important;
+  overflow: visible !important;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius-sm);
+  background: var(--asc-card);
+}
+#content_ctl00 #content_rb_active input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+#content_ctl00 #content_rb_active label {
+  margin: 0 !important;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--asc-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: background .12s, color .12s;
+}
+#content_ctl00 #content_rb_active label:first-of-type {
+  border-radius: 7px 0 0 7px;
+}
+#content_ctl00 #content_rb_active label:last-of-type {
+  border-radius: 0 7px 7px 0;
+  border-left: 1px solid var(--asc-border);
+}
+#content_ctl00 #content_rb_active input:checked + label {
+  background: var(--asc-accent);
+  color: #fff;
+}
+#content_ctl00 #content_rb_active input:focus-visible + label {
+  outline: 2px solid var(--asc-accent);
+  outline-offset: 1px;
+}
+
+/* Icon buttons (refresh, collapse) */
+.asc-icon-btn,
+#content_ctl00 .card .asc-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: var(--asc-radius-sm);
+  background: transparent;
+  color: var(--asc-muted) !important;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  text-decoration: none !important;
+  transition: background .12s, color .12s;
+}
+.asc-icon-btn:hover,
+#content_ctl00 .card .asc-refresh:hover {
+  background: #e2e8f0;
+  color: var(--asc-text-strong) !important;
+}
+.asc-icon-btn:focus-visible {
+  outline: 2px solid var(--asc-accent);
+  outline-offset: 1px;
+}
+#content_ctl00 .card .asc-refresh i {
+  font-size: 13px !important;
+}
+.asc-collapse-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform .15s;
+}
+.asc-collapsed .asc-collapse-btn svg {
+  transform: rotate(-90deg);
+}
+
+/* Card body */
+.asc-body {
+  max-height: var(--asc-list-max); /* dashboard.js sets a measured value inline */
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+#content_div_web .asc-body,
+#content_div_phone .asc-body {
+  max-height: 40vh;
+}
+.asc-collapsed .asc-body,
+.asc-collapsed .asc-tools {
+  display: none !important;
+}
+.asc-empty-note {
+  font-size: 12.5px;
+  color: var(--asc-muted);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Tables
+   -------------------------------------------------------------------------- */
+#content_ctl00 table.gridvw {
+  width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important; /* sticky header/pager need the card to scroll, not the table */
+  border-collapse: separate !important;
+  border-spacing: 0;
+  font-size: 13px;
+  table-layout: auto;
+  background: transparent;
+}
+
+#content_ctl00 table.gridvw > tbody > tr {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+#content_ctl00 table.gridvw > tbody > tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 12px !important;
+  background: #f8fafc !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--asc-border) !important;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--asc-muted) !important;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+#content_ctl00 table.gridvw > tbody > tr > th a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+#content_ctl00 table.gridvw > tbody > tr > th a::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 5px;
+  vertical-align: 0;
+  opacity: .5;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='7 9 12 4 17 9'/><polyline points='7 15 12 20 17 15'/></svg>") no-repeat center / contain;
+}
+#content_ctl00 table.gridvw > tbody > tr > th a:hover::after {
+  opacity: 1;
+}
+
+#content_ctl00 table.gridvw > tbody > tr > td {
+  padding: 8px 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--asc-border) !important;
+  vertical-align: top !important;
+  text-align: left !important;
+  width: auto !important;
+  color: var(--asc-text) !important;
+  line-height: 1.4;
+  background: var(--asc-card);
+  transition: background .08s;
+}
+#content_ctl00 table.gridvw > tbody > tr:nth-child(odd) > td {
+  background: var(--asc-row-alt);
+}
+#content_ctl00 table.gridvw > tbody > tr:not(.pager):hover > td {
+  background: var(--asc-row-hover);
+}
+#content_ctl00 table.gridvw > tbody > tr:last-child:not(.pager) > td {
+  border-bottom: 0 !important;
+}
+
+#content_ctl00 table.gridvw > tbody > tr > td a {
+  color: var(--asc-accent) !important;
+  text-decoration: none !important;
+  font-weight: 500;
+}
+#content_ctl00 table.gridvw > tbody > tr > td a:hover {
+  text-decoration: underline !important;
+}
+
+/* Job ID → monospace chip */
+#content_ctl00 table.gridvw a.jo_link {
+  display: inline-block;
+  font-family: var(--asc-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #eef2f7;
+  color: #334155 !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+#content_ctl00 table.gridvw a.jo_link:hover {
+  background: var(--asc-accent-soft);
+  color: var(--asc-accent-strong) !important;
+  text-decoration: none !important;
+}
+
+/* Customer cell: "Company- Last, First" split by dashboard.js */
+#content_ctl00 table.gridvw a.asc-customer {
+  display: block;
+  color: var(--asc-text-strong) !important;
+  font-weight: 500;
+}
+#content_ctl00 table.gridvw a.asc-customer:hover .asc-company {
+  color: var(--asc-accent-strong);
+  text-decoration: underline;
+}
+#content_ctl00 table.gridvw a.asc-customer:hover {
+  text-decoration: none !important;
+}
+#content_ctl00 table.gridvw .asc-company {
+  display: block;
+  font-weight: 600;
+}
+#content_ctl00 table.gridvw .asc-contact {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--asc-muted);
+}
+
+/* Card footer: the pager, lifted out of the scrolling table by welcome.js */
+.asc-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--asc-border);
+  background: var(--asc-card-head);
+  flex: none;
+}
+.asc-collapsed .asc-foot { display: none !important; }
+#content_ctl00 .asc-foot a,
+#content_ctl00 .asc-foot span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: var(--asc-radius-sm);
+  background: #fff;
+  color: var(--asc-text-strong) !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none !important;
+  box-shadow: 0 1px 1px rgba(16, 24, 40, .04);
+}
+#content_ctl00 .asc-foot a:hover {
+  border-color: var(--asc-accent-border);
+  background: var(--asc-accent-soft);
+  color: var(--asc-accent-strong) !important;
+}
+#content_ctl00 .asc-foot a svg { width: 13px; height: 13px; }
+#content_ctl00 .asc-foot .asc-page-next { margin-left: auto; }
+#content_ctl00 .asc-foot .asc-page-current {
+  background: var(--asc-accent);
+  border-color: var(--asc-accent);
+  color: #fff !important;
+}
+
+/* --------------------------------------------------------------------------
+   Status badges (Job Orders "Status" column)
+   -------------------------------------------------------------------------- */
+#content_ctl00 table.gridvw td.asc-status-cell {
+  white-space: nowrap;
+  text-align: right !important;
+}
+#content_ctl00 table.gridvw th.asc-status-head {
+  text-align: right;
+}
+
+.asc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px 0 7px;
+  border-radius: 999px;
+  border: 1px solid var(--b-border, #e2e8f0);
+  background: var(--b-bg, #f1f5f9);
+  color: var(--b-fg, #334155);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  line-height: 1;
+}
+.asc-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--b-dot, currentColor);
+  flex: none;
+}
+
+/* Colour per status. Keys are normalised by dashboard.js (lowercase, no spaces). */
+.asc-badge[data-status="lead"]          { --b-bg: #f1f5f9; --b-border: #e2e8f0; --b-fg: #475569; --b-dot: #94a3b8; }
+.asc-badge[data-status="crm"]           { --b-bg: #f1f5f9; --b-border: #e2e8f0; --b-fg: #475569; --b-dot: #64748b; }
+.asc-badge[data-status="estimate"]      { --b-bg: #fef3c7; --b-border: #fde68a; --b-fg: #92400e; --b-dot: #f59e0b; }
+.asc-badge[data-status="quote"]         { --b-bg: #dbeafe; --b-border: #bfdbfe; --b-fg: #1e40af; --b-dot: #3b82f6; }
+.asc-badge[data-status="esigned"]       { --b-bg: #ede9fe; --b-border: #ddd6fe; --b-fg: #5b21b6; --b-dot: #8b5cf6; }
+.asc-badge[data-status="undercontract"] { --b-bg: #e0e7ff; --b-border: #c7d2fe; --b-fg: #3730a3; --b-dot: #6366f1; }
+.asc-badge[data-status="holding"]       { --b-bg: #ffedd5; --b-border: #fed7aa; --b-fg: #9a3412; --b-dot: #f97316; }
+.asc-badge[data-status="installation"]  { --b-bg: #ccfbf1; --b-border: #99f6e4; --b-fg: #115e59; --b-dot: #14b8a6; }
+.asc-badge[data-status="wip"],
+.asc-badge[data-status="workinprogress"]{ --b-bg: #cffafe; --b-border: #a5f3fc; --b-fg: #155e75; --b-dot: #06b6d4; }
+.asc-badge[data-status="billing"]       { --b-bg: #ecfccb; --b-border: #d9f99d; --b-fg: #3f6212; --b-dot: #84cc16; }
+.asc-badge[data-status="billed"]        { --b-bg: #dcfce7; --b-border: #bbf7d0; --b-fg: #166534; --b-dot: #22c55e; }
+.asc-badge[data-status="finished"]      { --b-bg: #d1fae5; --b-border: #a7f3d0; --b-fg: #065f46; --b-dot: #059669; }
+.asc-badge[data-status="cancelled"]     { --b-bg: #fee2e2; --b-border: #fecaca; --b-fg: #991b1b; --b-dot: #ef4444; }
+.asc-badge[data-status="lostjob"]       { --b-bg: #ffe4e6; --b-border: #fecdd3; --b-fg: #9f1239; --b-dot: #f43f5e; }
+
+/* Coloured stripe on the row edge so status reads even when scanning fast */
+#content_ctl00 table.gridvw > tbody > tr[data-status] > td:first-child {
+  box-shadow: inset 3px 0 0 var(--row-stripe, transparent);
+}
+tr[data-status="lead"]          { --row-stripe: #94a3b8; }
+tr[data-status="crm"]           { --row-stripe: #64748b; }
+tr[data-status="estimate"]      { --row-stripe: #f59e0b; }
+tr[data-status="quote"]         { --row-stripe: #3b82f6; }
+tr[data-status="esigned"]       { --row-stripe: #8b5cf6; }
+tr[data-status="undercontract"] { --row-stripe: #6366f1; }
+tr[data-status="holding"]       { --row-stripe: #f97316; }
+tr[data-status="installation"]  { --row-stripe: #14b8a6; }
+tr[data-status="wip"],
+tr[data-status="workinprogress"]{ --row-stripe: #06b6d4; }
+tr[data-status="billing"]       { --row-stripe: #84cc16; }
+tr[data-status="billed"]        { --row-stripe: #22c55e; }
+tr[data-status="finished"]      { --row-stripe: #059669; }
+tr[data-status="cancelled"]     { --row-stripe: #ef4444; }
+tr[data-status="lostjob"]       { --row-stripe: #f43f5e; }
+
+/* --------------------------------------------------------------------------
+   Task list specifics
+   -------------------------------------------------------------------------- */
+/* Assignee chip; hue is set per person by dashboard.js (--h) */
+.asc-who {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 2px 8px 2px 4px;
+  border-radius: 999px;
+  background: hsl(var(--h, 210) 70% 94%);
+  color: hsl(var(--h, 210) 45% 28%);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.asc-who::before {
+  content: attr(data-initials);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: hsl(var(--h, 210) 55% 45%);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  flex: none;
+}
+.asc-who.asc-who--unassigned {
+  background: #f1f5f9;
+  color: var(--asc-muted);
+  font-weight: 500;
+}
+.asc-who.asc-who--unassigned::before {
+  background: #cbd5e1;
+}
+
+/* Follow-up date pill */
+.asc-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.asc-date--overdue { background: #fee2e2; color: #991b1b; }
+.asc-date--today   { background: #fef3c7; color: #92400e; }
+.asc-date--soon    { background: #dbeafe; color: #1e40af; }
+.asc-date-rel {
+  font-weight: 500;
+  opacity: .8;
+}
+
+/* Task text: the main thing to read → dark, not link-blue */
+#content_ctl00 #content_GridView2 > tbody > tr > td a[href="#m_go"] {
+  color: var(--asc-text-strong) !important;
+  font-weight: 500;
+}
+#content_ctl00 #content_GridView2 > tbody > tr > td a[href="#m_go"]:hover {
+  color: var(--asc-accent-strong) !important;
+}
+/* Job link on tasks: secondary */
+#content_ctl00 #content_GridView2 > tbody > tr > td:last-child a {
+  color: var(--asc-muted) !important;
+  font-weight: 500;
+}
+#content_ctl00 #content_GridView2 > tbody > tr > td:last-child a:hover {
+  color: var(--asc-accent-strong) !important;
+}
+/* The "*" flag column: keep narrow */
+#content_ctl00 #content_GridView2 > tbody > tr > th.asc-flag-head,
+#content_ctl00 #content_GridView2 > tbody > tr > td.asc-flag-cell {
+  width: 1% !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  text-align: center !important;
+  color: var(--asc-accent) !important;
+}
+#content_ctl00 #content_GridView2 > tbody > tr > td.asc-flag-cell:empty::before {
+  content: "";
+}
+/* Make Who/Job columns visible again on small screens is the site's choice;
+   we keep its responsive hiding as-is (.g-hidden-sm-down). */
+
+/* --------------------------------------------------------------------------
+   Reduce motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  #content_ctl00 *,
+  .asc-resizer::before {
+    transition: none !important;
+  }
+}
+}

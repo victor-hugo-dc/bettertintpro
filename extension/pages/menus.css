@@ -1,0 +1,122 @@
+/* ==========================================================================
+   TintPro Restyle — pages/menus.css
+   Menu frames of the Settings / Inventory / Accounts Receivable framesets.
+   They sit to the right of the sidebar shell inside the widened left column.
+   ========================================================================== */
+html:not(.asc-off) {
+body.asc-menu {
+  background: var(--asc-bg) !important;
+  font-family: var(--asc-font) !important;
+  font-size: 13px !important;
+  color: var(--asc-text);
+  padding: 12px 10px 24px !important;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+body.asc-menu.asc-shell { margin-left: var(--asc-sidebar-w) !important; }
+body.asc-menu form { margin: 0; }
+body.asc-menu .asc-menu-list { display: block; }
+body.asc-menu .asc-menu-section {
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  padding: 8px;
+  margin: 0 0 10px;
+}
+body.asc-menu .asc-menu-section h3 {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--asc-muted);
+  margin: 4px 8px 6px;
+}
+body.asc-menu a.asc-menu-link {
+  display: block;
+  padding: 6px 10px;
+  margin: 1px 0;
+  border-radius: 7px;
+  color: var(--asc-text-strong) !important;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none !important;
+  font-family: inherit !important;
+  line-height: 1.3;
+}
+body.asc-menu a.asc-menu-link:hover { background: var(--asc-row-hover); color: var(--asc-accent-strong) !important; }
+body.asc-menu a.asc-menu-link.asc-active { background: var(--asc-accent-soft); color: var(--asc-accent-strong) !important; font-weight: 600; }
+body.asc-menu #L_errmsg, body.asc-menu #l_errmsg { display: block; margin: 0 0 8px; font-size: 12px; }
+
+/* Inventory menu: owner name block + sections */
+body.asc-menu-inv .style3 { display: block; font-size: 14px; font-weight: 650; color: var(--asc-text-strong); margin: 2px 0 10px; }
+body.asc-menu-inv .style3 br { display: none; }
+body.asc-menu-inv .style1 { display: block; margin-top: 8px; font-size: 12px; }
+body.asc-menu-inv #P_inv, body.asc-menu-inv #P_admin { margin: 0; }
+
+/* Settings menu */
+body.asc-menu-settings #Panel1 { width: auto !important; height: auto !important; overflow: visible !important; }
+
+/* AR menu (buttons + report box) */
+body.asc-menu-ar #menu { width: auto !important; }
+body.asc-menu-ar .auto-style1 {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--asc-text-strong) !important;
+  margin: 2px 0 10px;
+  text-align: left !important;
+}
+body.asc-menu-ar #menu > table,
+body.asc-menu-ar #menu > table > tbody > tr > td { display: block; width: auto !important; padding: 0 !important; }
+body.asc-menu-ar #menu td[style*="height: 20px"] { height: 8px !important; }
+body.asc-menu-ar #menu table[style*="ffffb9"] {
+  display: block;
+  width: auto !important;
+  margin: 0 0 10px !important;
+  padding: 10px 12px !important;
+  background: #fff !important;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+}
+body.asc-menu-ar #menu table[style*="ffffb9"] tbody,
+body.asc-menu-ar #menu table[style*="ffffb9"] tr,
+body.asc-menu-ar #menu table[style*="ffffb9"] td { display: block; padding: 0 0 6px !important; }
+body.asc-menu-ar #menu table[style*="ffffb9"] b { display: block; font-size: 12px; margin-bottom: 4px; }
+body.asc-menu-ar #menu input[type="text"],
+body.asc-menu-ar #menu select {
+  width: 100% !important;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 12.5px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  background: #fff;
+  margin: 0 0 4px !important;
+}
+body.asc-menu-ar #menu select { -webkit-appearance: none; appearance: none; padding-right: 26px; background: #fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 8px center; }
+body.asc-menu-ar #menu span[style*="display:inline-block"],
+body.asc-menu-ar #menu span[style*="display: inline-block"] { display: block !important; width: auto !important; font-size: 11px; color: var(--asc-muted); margin-top: -2px; }
+body.asc-menu-ar #menu input[type="submit"] {
+  display: block;
+  width: 100% !important;
+  box-sizing: border-box;
+  margin: 0 0 6px !important;
+  padding: 7px 10px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--asc-text-strong);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(16, 24, 40, .04);
+}
+body.asc-menu-ar #menu input[type="submit"]:hover { background: #f8fafc; border-color: #94a3b8; }
+body.asc-menu-ar #menu input[type="submit"][name="bt_rpt"] { background: var(--asc-accent); border-color: var(--asc-accent); color: #fff; text-align: center; }
+}

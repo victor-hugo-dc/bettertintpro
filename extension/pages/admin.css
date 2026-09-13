@@ -1,0 +1,276 @@
+/* ==========================================================================
+   TintPro Restyle — pages/admin.css
+   Bill To's / Referrals (admin/referrals.aspx) and Employees (admin/employees.aspx)
+   ========================================================================== */
+
+/* Everything below is disabled on pages the gate marks off (see common/gate.js) */
+html:not(.asc-off) {
+body.asc-admin #content_div .g-pa-15,
+body.asc-admin #content_div .g-pa-20 {
+  padding: 16px 20px !important;
+}
+body.asc-admin #content_div .g-ml-60 { margin-left: 0 !important; }
+body.asc-admin #content_div .g-ml-60 > .g-pa-15 > .row { margin: 0 !important; }
+body.asc-admin #content_div .g-ml-60 > .g-pa-15 > .row > .col-12 { padding: 0 !important; }
+
+/* Page title */
+body.asc-admin #content_div h5,
+body.asc-admin #content_div .style1 {
+  display: block;
+  font-size: 18px;
+  font-weight: 650;
+  color: var(--asc-text-strong);
+  margin: 0 0 12px;
+  letter-spacing: -.01em;
+}
+
+/* Toolbar (built by admin.js from the loose controls above the grid) */
+.asc-admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 14px;
+  margin: 0 0 12px;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+}
+.asc-admin-toolbar .asc-tool-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.asc-admin-toolbar .asc-tool-group + .asc-tool-group {
+  padding-left: 14px;
+  border-left: 1px solid var(--asc-border);
+}
+.asc-admin-toolbar .asc-tool-spacer { flex: 1 1 auto; }
+body.asc-admin #content_div .asc-admin-toolbar input[type="submit"] {
+  width: auto !important;
+  color: var(--asc-text-strong) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+body.asc-admin #content_div .asc-admin-toolbar input[type="text"] {
+  width: 200px !important;
+}
+body.asc-admin #content_div .asc-admin-toolbar label {
+  margin: 0 !important;
+  padding: 0 0 0 4px !important;
+  font-weight: 500;
+}
+body.asc-admin #content_div .asc-admin-toolbar .style2 { padding: 0; }
+body.asc-admin #content_div .asc-admin-toolbar select { max-width: 260px; }
+body.asc-admin #content_div .asc-admin-toolbar b {
+  font-weight: 600;
+  color: var(--asc-muted);
+  font-size: 12px;
+}
+body.asc-admin #content_div .asc-admin-toolbar #content_l_over {
+  flex: 1 1 100%;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+body.asc-admin #content_div .asc-admin-toolbar #content_l_over br { display: none; }
+body.asc-admin #content_div .asc-admin-toolbar br { display: none; }
+
+/* stat tiles for the employee counts */
+.asc-stat {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--asc-border);
+  font-size: 11px;
+  color: var(--asc-muted);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.asc-stat b {
+  font-size: 14px;
+  color: var(--asc-text-strong) !important;
+  font-weight: 700 !important;
+}
+.asc-stat.asc-stat--over b { color: var(--asc-danger) !important; }
+
+/* Segmented Active / Inactive / All */
+body.asc-admin #content_div #content_rb_active {
+  display: inline-flex !important;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius-sm);
+  background: #fff;
+  overflow: hidden;
+}
+body.asc-admin #content_div #content_rb_active input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+body.asc-admin #content_div #content_rb_active label {
+  margin: 0 !important;
+  padding: 5px 12px !important;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--asc-muted);
+  cursor: pointer;
+  border-left: 1px solid var(--asc-border);
+}
+body.asc-admin #content_div #content_rb_active label:first-of-type { border-left: 0; }
+body.asc-admin #content_div #content_rb_active input:checked + label {
+  background: var(--asc-accent);
+  color: #fff;
+}
+
+/* the outer layout table on the Employees page must not grow with the grid */
+body.asc-admin #content_div table.asc-layout-table {
+  width: 100%;
+  table-layout: fixed;
+}
+body.asc-admin #content_div table.asc-layout-table > tbody > tr > td { padding: 0; }
+
+/* The grid */
+body.asc-admin #content_div .asc-grid-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+}
+body.asc-admin #content_div #content_Gridview1 {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  color: var(--asc-text) !important;
+  font-size: 13px;
+}
+body.asc-admin #content_div #content_Gridview1 > tbody > tr {
+  background: transparent !important;
+  color: inherit !important;
+}
+body.asc-admin #content_div #content_Gridview1 > tbody > tr > th {
+  position: sticky;
+  top: 0; /* relative to the scroll wrapper */
+  z-index: 2;
+  padding: 9px 10px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid var(--asc-border);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--asc-muted) !important;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+body.asc-admin #content_div #content_Gridview1 > tbody > tr > th a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+body.asc-admin #content_div #content_Gridview1 > tbody > tr > th a:hover { color: var(--asc-text-strong) !important; }
+body.asc-admin #content_div #content_Gridview1 > tbody > tr > td {
+  padding: 7px 10px !important;
+  border-bottom: 1px solid var(--asc-border);
+  vertical-align: middle;
+  background: #fff;
+  line-height: 1.4;
+  color: var(--asc-text) !important;
+}
+body.asc-admin #content_div #content_Gridview1 > tbody > tr:nth-child(odd) > td { background: var(--asc-row-alt); }
+body.asc-admin #content_div #content_Gridview1 > tbody > tr:hover > td { background: var(--asc-row-hover); }
+body.asc-admin #content_div #content_Gridview1 > tbody > tr:last-child > td { border-bottom: 0; }
+body.asc-admin #content_div #content_Gridview1 td a {
+  color: var(--asc-accent) !important;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+body.asc-admin #content_div #content_Gridview1 td a:hover { text-decoration: underline !important; }
+/* the id column the site renders in 1px font */
+body.asc-admin #content_div #content_Gridview1 td[style*="font-size:1px"] {
+  font-size: 11px !important;
+  font-family: var(--asc-mono);
+  color: var(--asc-muted) !important;
+}
+body.asc-admin #content_div #content_Gridview1 td[style*="font-size:1px"] + td,
+body.asc-admin #content_div #content_Gridview1 td:first-child {
+  white-space: nowrap;
+}
+/* pager */
+body.asc-admin #content_div #content_Gridview1 tr:last-child > td[colspan] {
+  background: #f8fafc !important;
+  padding: 8px 12px !important;
+}
+body.asc-admin #content_div #content_Gridview1 td[colspan] table { width: auto; }
+body.asc-admin #content_div #content_Gridview1 td[colspan] table td {
+  padding: 0 4px 0 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+body.asc-admin #content_div #content_Gridview1 td[colspan] a,
+body.asc-admin #content_div #content_Gridview1 td[colspan] span {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius-sm);
+  background: #fff;
+  color: var(--asc-text) !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+body.asc-admin #content_div #content_Gridview1 td[colspan] span {
+  background: var(--asc-accent);
+  border-color: var(--asc-accent);
+  color: #fff !important;
+}
+/* Employees: type + colour */
+.asc-type-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #f1f5f9;
+  color: #334155;
+}
+.asc-type-chip[data-type="superuser"] { background: #ede9fe; color: #5b21b6; }
+.asc-type-chip[data-type="droneplus"] { background: #dbeafe; color: #1e40af; }
+.asc-type-chip[data-type="drone"] { background: #f1f5f9; color: #475569; }
+.asc-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--asc-muted);
+  white-space: nowrap;
+}
+.asc-swatch::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--c);
+  border: 1px solid rgba(0, 0, 0, .12);
+  flex: none;
+}
+body.asc-admin #content_div #content_Gridview1 td.asc-wide-cell { min-width: 200px; }
+body.asc-admin #content_div #content_Gridview1 td.asc-phone-cell { white-space: nowrap; font-variant-numeric: tabular-nums; }
+body.asc-admin #content_div #content_Gridview1 td.asc-inactive-cell { text-align: center; }
+body.asc-admin #content_div #content_Gridview1 td.asc-inactive-cell span.aspNetDisabled input { opacity: .6; }
+}

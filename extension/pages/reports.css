@@ -1,0 +1,362 @@
+/* ==========================================================================
+   TintPro Restyle — pages/reports.css
+   Standalone report pages under /trunk/admin/ (report menus + report output).
+   Scoped to body.asc-report, which reports.js adds only when the page has no
+   sidebar chrome.
+   ========================================================================== */
+/* Everything below is disabled on pages the gate marks off (see common/gate.js) */
+html:not(.asc-off) {
+body.asc-report {
+  margin: 0;
+  padding: 20px 24px 40px !important;
+  background: var(--asc-bg) !important;
+  color: var(--asc-text);
+  font-family: var(--asc-font) !important;
+  font-size: 13px !important;
+  line-height: 1.45;
+}
+body.asc-report form {
+  max-width: 100%;
+}
+body.asc-report .asc-report-title {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  color: var(--asc-text-strong);
+  margin: 0 0 14px;
+}
+body.asc-report .asc-report-card {
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+/* Controls */
+body.asc-report input[type="text"],
+body.asc-report input:not([type]),
+body.asc-report select,
+body.asc-report textarea {
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--asc-text);
+  background: #fff;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  padding: 5px 9px;
+  min-height: 32px;
+  margin: 2px 4px 2px 0;
+}
+body.asc-report select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 28px;
+  background: #fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 9px center;
+  cursor: pointer;
+}
+body.asc-report input[type="text"]:focus,
+body.asc-report select:focus,
+body.asc-report textarea:focus {
+  outline: none;
+  border-color: var(--asc-accent);
+  box-shadow: 0 0 0 3px var(--asc-accent-soft);
+}
+body.asc-report input[type="submit"],
+body.asc-report input[type="button"],
+body.asc-report button,
+body.asc-report a.newStyle2,
+body.asc-report .newStyle1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 5px 12px;
+  margin: 3px 6px 3px 0;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--asc-text-strong);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(16, 24, 40, .04);
+  white-space: normal;
+  text-align: left;
+}
+body.asc-report input[type="submit"]:hover,
+body.asc-report input[type="button"]:hover,
+body.asc-report button:hover,
+body.asc-report a.newStyle2:hover,
+body.asc-report .newStyle1:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+body.asc-report input[type="submit"][value="Search"],
+body.asc-report input[type="submit"][value="Go"],
+body.asc-report input[type="submit"][value="Run"],
+body.asc-report input[type="submit"][value="Submit"] {
+  background: var(--asc-accent);
+  border-color: var(--asc-accent);
+  color: #fff;
+}
+body.asc-report input[type="checkbox"],
+body.asc-report input[type="radio"] {
+  accent-color: var(--asc-accent);
+  width: 15px;
+  height: 15px;
+  vertical-align: -2px;
+  margin: 0 4px 0 0;
+}
+body.asc-report label { margin-right: 10px; font-weight: 500; }
+body.asc-report b, body.asc-report strong { color: var(--asc-text-strong); }
+body.asc-report a { color: var(--asc-accent); }
+body.asc-report .style1 { display: flex; flex-wrap: wrap; gap: 2px; }
+body.asc-report span[style*="color:#FF0000"], body.asc-report span[style*="color: #FF0000"] { color: var(--asc-danger) !important; }
+
+/* Data tables (classified by reports.js) */
+body.asc-report .asc-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  margin: 6px 0 18px;
+}
+body.asc-report table.asc-report-table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  font-size: 12.5px;
+  padding: 0 !important;
+}
+body.asc-report table.asc-report-table > tbody > tr,
+body.asc-report table.asc-report-table > thead > tr {
+  background: transparent !important;
+}
+body.asc-report table.asc-report-table tr.asc-head-row > td,
+body.asc-report table.asc-report-table tr.asc-head-row > th,
+body.asc-report table.asc-report-table > thead > tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 9px 10px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid var(--asc-border);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--asc-muted) !important;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+body.asc-report table.asc-report-table tr.asc-head-row b { color: inherit; font-weight: 700; }
+body.asc-report table.asc-report-table tr.asc-head-row a,
+body.asc-report table.asc-report-table > thead a { color: inherit !important; text-decoration: none !important; }
+body.asc-report .asc-hidden-title { display: none !important; }
+body.asc-report table.asc-report-table > tbody > tr > td {
+  padding: 7px 10px !important;
+  border-bottom: 1px solid var(--asc-border);
+  vertical-align: top;
+  background: #fff;
+  color: var(--asc-text);
+}
+body.asc-report table.asc-report-table > tbody > tr:nth-child(even) > td { background: var(--asc-row-alt); }
+body.asc-report table.asc-report-table > tbody > tr:hover > td { background: var(--asc-row-hover); }
+body.asc-report table.asc-report-table > tbody > tr:last-child > td { border-bottom: 0; }
+body.asc-report table.asc-report-table td.asc-wide { min-width: 240px; }
+body.asc-report table.asc-report-table td.asc-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+body.asc-report table.asc-report-table tr.asc-total-row > td { font-weight: 700; background: #f1f5f9 !important; color: var(--asc-text-strong); }
+body.asc-report table.asc-report-table tr.asc-group-row > td {
+  background: #eef2f7 !important;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--asc-muted);
+  padding: 6px 10px !important;
+}
+body.asc-report table.asc-report-table tr.asc-group-row br { display: none; }
+body.asc-report table.asc-report-table img { vertical-align: middle; }
+/* the AR list's header cells carry inline grey backgrounds */
+body.asc-report table.asc-report-table tr.asc-head-row { background: transparent !important; }
+body.asc-report table.asc-report-table td a { color: var(--asc-accent); font-weight: 500; text-decoration: none; }
+body.asc-report table.asc-report-table td a:hover { text-decoration: underline; }
+body.asc-report table.asc-report-table select { min-height: 28px; padding: 2px 24px 2px 6px; font-size: 12px; margin: 0; }
+body.asc-report .asc-grid-head { padding: 0 2px; }
+
+/* intro / outro cards built around the table */
+body.asc-report .asc-report-intro { line-height: 1.5; }
+body.asc-report .asc-report-intro > b:first-child,
+body.asc-report .asc-report-intro > strong:first-child {
+  display: block;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  margin-bottom: 2px;
+}
+body.asc-report .asc-report-intro br + br { display: none; }
+body.asc-report .asc-report-intro hr { border: 0; border-top: 1px solid var(--asc-border); margin: 10px 0; }
+body.asc-report .asc-report-intro #l_errmsg,
+body.asc-report .asc-report-intro span[id$="errmsg"] { display: inline-block; color: var(--asc-danger); font-weight: 500; }
+body.asc-report .asc-report-intro table { margin: 4px 0; }
+body.asc-report .asc-report-intro table td { padding: 2px 8px 2px 0; }
+body.asc-report .asc-report-outro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
+  gap: 8px 24px;
+  font-weight: 600;
+}
+body.asc-report .asc-report-outro br { display: none; }
+body.asc-report .asc-report-outro b { display: contents; }
+body.asc-report .asc-report-outro span[id^="l_"],
+body.asc-report .asc-report-outro span[id^="L_"] { font-weight: 700; color: var(--asc-text-strong); }
+body.asc-report .asc-report-outro #L_sql, body.asc-report .asc-report-outro #l_sql { grid-column: 1 / -1; font-weight: 400; font-size: 11px; color: var(--asc-muted); }
+/* split layouts (mailing_list.aspx) stacked: search block on top, list below */
+body.asc-report table.asc-stack,
+body.asc-report table.asc-stack > tbody,
+body.asc-report table.asc-stack > tbody > tr,
+body.asc-report table.asc-stack > tbody > tr > td { display: block; width: auto !important; padding: 0 !important; }
+body.asc-report table.asc-stack > tbody > tr > td:empty,
+body.asc-report table.asc-stack > tbody > tr > td.auto-style3 { display: none; }
+body.asc-report table.asc-stack > tbody > tr > td + td { margin-top: 14px; }
+body.asc-report table.asc-stack > tbody > tr > td > table:not(.asc-report-table) {
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  padding: 10px 14px;
+}
+body.asc-report table.asc-stack > tbody > tr > td > table:not(.asc-report-table) td { padding: 4px 8px; vertical-align: middle; }
+body.asc-report table.asc-stack table[id] td { padding: 2px 6px 2px 0; }
+
+/* ---- Settings sub-pages (loaded in the Settings hub's main pane) ---- */
+body.asc-report h3, body.asc-report h2 { font-size: 18px; font-weight: 650; letter-spacing: -.01em; color: var(--asc-text-strong); margin: 0 0 12px; }
+body.asc-report p[style*="line-height:50px"] { line-height: 1.3 !important; margin: 0 0 8px; }
+body.asc-report form[style*="width"] { width: auto !important; max-width: 1100px; }
+body.asc-report .left, body.asc-report .right { float: none !important; width: auto !important; }
+body.asc-report .left { background: #fff; border: 1px solid var(--asc-border); border-radius: var(--asc-radius); box-shadow: var(--asc-shadow); padding: 14px 16px; margin-bottom: 14px; }
+body.asc-report .left b { display: inline-block; min-width: 120px; margin: 6px 0 2px; }
+body.asc-report textarea { font-family: inherit; font-size: 13px; border: 1px solid var(--asc-border-strong); border-radius: 8px; padding: 6px 9px; width: min(100%, 520px) !important; }
+/* tab lists (owner.aspx etc.): <ul><li class="active"><a class="lb_style"> */
+body.asc-report ul:has(> li > a.lb_style) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 4px;
+  border: 1px solid var(--asc-border);
+  border-radius: 10px;
+  background: #fff;
+}
+body.asc-report ul:has(> li > a.lb_style) > li {
+  all: unset;
+  display: inline-block;
+}
+body.asc-report ul:has(> li > a.lb_style) > li::before,
+body.asc-report ul:has(> li > a.lb_style) > li::after { content: none !important; display: none !important; }
+body.asc-report img { max-width: 100%; height: auto; }
+body.asc-report div[style*="float:left"], body.asc-report div[style*="float: left"] { min-width: 0; }
+body.asc-report ul > li > a.lb_style {
+  display: inline-flex;
+  padding: 6px 14px;
+  border-radius: 7px;
+  color: var(--asc-muted);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+body.asc-report ul > li > a.lb_style:hover { background: #f1f5f9; color: var(--asc-text-strong); }
+body.asc-report ul > li.active > a.lb_style { background: var(--asc-nav-bg) !important; color: #fff !important; }
+body.asc-report ul > li > a.lb_style { background: transparent; border: 0 !important; transform: none !important; }
+/* DetailsView (key / value) */
+body.asc-report table[id*="DetailsView"] {
+  width: min(100%, 720px);
+  border: 1px solid var(--asc-border) !important;
+  border-radius: var(--asc-radius);
+  background: #fff !important;
+  box-shadow: var(--asc-shadow);
+  border-collapse: separate !important;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 13px;
+}
+body.asc-report table[id*="DetailsView"] > tbody > tr > td {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--asc-border) !important;
+  vertical-align: middle;
+  background: #fff !important;
+  color: var(--asc-text) !important;
+}
+body.asc-report table[id*="DetailsView"] > tbody > tr > td:first-child { width: 200px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--asc-muted) !important; background: #f8fafc !important; }
+body.asc-report table[id*="DetailsView"] > tbody > tr:last-child > td { border-bottom: 0 !important; }
+body.asc-report table[id*="DetailsView"] a.cmd, body.asc-report a.cmd {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 3px 10px;
+  margin-right: 4px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--asc-text-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+body.asc-report a.cmd:hover { background: #f8fafc; }
+/* GridView edit rows: Edit / Delete / Update / Cancel links */
+body.asc-report table.asc-report-table td a[href*="Edit$"],
+body.asc-report table.asc-report-table td a[href*="Delete$"],
+body.asc-report table.asc-report-table td a[href*="Update$"],
+body.asc-report table.asc-report-table td a[href*="Cancel$"],
+body.asc-report table.asc-report-table td a[href*="Select$"],
+body.asc-report table.asc-report-table td a[onclick*="confirm"] {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px;
+  margin: 1px 2px 1px 0;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--asc-text-strong) !important;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+body.asc-report table.asc-report-table td a[onclick*="confirm"],
+body.asc-report table.asc-report-table td a[href*="Delete$"] { color: var(--asc-danger) !important; border-color: #fecaca; }
+body.asc-report table.asc-report-table td a[href*="Edit$"]:hover,
+body.asc-report table.asc-report-table td a[href*="Select$"]:hover { background: #f8fafc; }
+body.asc-report table.asc-report-table td input[type="text"] { min-height: 28px; padding: 3px 8px; }
+body.asc-report table.asc-report-table td:has(> a[href*="Edit$"]),
+body.asc-report table.asc-report-table td:has(> a[href*="Select$"]) { white-space: nowrap; }
+body.asc-report .prnt { margin: 0 4px 0 0; }
+body.asc-report .style4 { display: block; font-size: 18px; font-weight: 650; color: var(--asc-text-strong); margin: 0 0 12px; }
+body.asc-report .style1 .style4 { display: inline; }
+
+/* Report menu link lists (report_menu.aspx) */
+body.asc-report table.asc-menu-table td {
+  padding: 4px 8px;
+}
+body.asc-report table.asc-menu-table a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--asc-text-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+body.asc-report table.asc-menu-table a:hover { background: #f8fafc; border-color: #94a3b8; }
+}

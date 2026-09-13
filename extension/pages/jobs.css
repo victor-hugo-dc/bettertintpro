@@ -1,0 +1,505 @@
+/* ==========================================================================
+   TintPro Restyle — pages/jobs.css
+   Customer/job edit form (edit_cust.aspx) and job details (jo_details.aspx)
+   ========================================================================== */
+
+/* Everything below is disabled on pages the gate marks off (see common/gate.js) */
+html:not(.asc-off) {
+/* --------------------------------------------------------------------------
+   edit_cust.aspx — customer form
+   -------------------------------------------------------------------------- */
+body.asc-edit-cust #content_div > .col > .g-pa-15 {
+  container-type: inline-size;
+}
+body.asc-edit-cust #content_ctl00.row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* the two boxes share the full width */
+  gap: 16px;
+  margin: 0 !important;
+  align-items: stretch;
+}
+@container (max-width: 860px) {
+  body.asc-edit-cust #content_ctl00.row { grid-template-columns: minmax(0, 1fr); }
+}
+
+body.asc-edit-cust #content_ctl00.row > .col-12 {
+  grid-column: 1 / -1;
+  padding: 0 !important;
+  max-width: none !important;
+}
+body.asc-edit-cust #content_ctl00.row > [class*="col-xl"],
+body.asc-edit-cust #content_ctl00.row > [class*="col-lg"]:not(.col-12) {
+  flex: none !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 16px !important;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  min-width: 0;
+}
+/* invisible helper buttons (0x0, disabled) must not become grid cells */
+body.asc-edit-cust #content_ctl00.row > input[type="submit"][value=""],
+body.asc-edit-cust #content_ctl00.row > input[style*="width:0px"] {
+  display: none !important;
+}
+/* headings with no text (server placeholders) */
+body.asc-edit-cust #content_div p.heading.asc-empty { display: none !important; }
+body.asc-edit-cust #content_div .asc-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+body.asc-edit-cust #content_div .asc-check label { margin: 0 !important; padding: 0 !important; }
+/* hidden modal panels must not become grid cards */
+body.asc-edit-cust #content_ctl00.row > .jo_modal,
+body.asc-edit-cust #content_ctl00.row > .ModalPopupPanel {
+  grid-column: 1 / -1;
+}
+
+/* Job id "tab" button at the top → chip */
+body.asc-edit-cust #content_div input[type="submit"].Clicked,
+body.asc-edit-cust #content_div input[type="submit"][id^="content_bt_job_"] {
+  font-family: var(--asc-mono);
+  font-size: 12px;
+  min-height: 28px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--asc-accent-soft) !important;
+  border-color: var(--asc-accent-border) !important;
+  color: var(--asc-accent-strong) !important;
+  margin: 0 6px 6px 0;
+}
+body.asc-edit-cust #content_div h5 {
+  font-size: 18px;
+  margin: 4px 0 12px;
+}
+body.asc-edit-cust #content_div h5[style*="transparent"] {
+  display: none;
+}
+
+/* Section headings */
+body.asc-edit-cust #content_div p.heading {
+  display: block;
+  width: auto !important;
+  margin: 18px -16px 12px !important;
+  padding: 8px 16px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid var(--asc-border);
+  border-bottom: 1px solid var(--asc-border);
+}
+body.asc-edit-cust #content_div p.heading:first-child {
+  margin-top: -16px !important;
+  border-top: 0;
+  border-radius: var(--asc-radius) var(--asc-radius) 0 0;
+}
+body.asc-edit-cust #content_div .desc_subtitle {
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--asc-muted);
+}
+
+/* Form rows: <p><label class="desc">…</label><input …></p> */
+body.asc-edit-cust #content_div #content_p_site p,
+body.asc-edit-cust #content_div #content_p_site > div.g-mb-15,
+body.asc-edit-cust #content_div .asc-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0 0 8px !important;
+  min-height: 32px;
+}
+body.asc-edit-cust #content_div p.heading { display: block; }
+body.asc-edit-cust #content_div label.desc,
+body.asc-edit-cust #content_div span.desc {
+  flex: 0 0 118px;
+  width: 118px !important;
+  max-width: 118px !important;
+  float: none !important;
+  padding: 0 !important;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--asc-muted);
+  white-space: normal !important;
+  line-height: 1.25;
+}
+body.asc-edit-cust #content_div label.desc.nodesc,
+body.asc-edit-cust #content_div label.desc[style*="transparent"] {
+  color: transparent !important;
+}
+body.asc-edit-cust #content_div .desc_in {
+  padding: 0 !important;
+  margin: 0;
+  font-size: 12.5px;
+}
+body.asc-edit-cust #content_div #content_p_site p > input[type="text"],
+body.asc-edit-cust #content_div #content_p_site p > input[type="email"],
+body.asc-edit-cust #content_div #content_p_site p > input:not([type]),
+body.asc-edit-cust #content_div #content_p_site p > select {
+  flex: 1 1 160px;
+  width: auto !important;
+  max-width: 520px !important;
+  min-width: 0;
+}
+/* small fixed-width pieces */
+body.asc-edit-cust #content_div input[maxlength="3"],
+body.asc-edit-cust #content_div input[maxlength="4"] {
+  flex: 0 0 58px !important;
+  width: 58px !important;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+body.asc-edit-cust #content_div input[maxlength="2"] {
+  flex: 0 0 52px !important;
+  width: 52px !important;
+  text-align: center;
+  text-transform: uppercase;
+}
+body.asc-edit-cust #content_div input[maxlength="5"],
+body.asc-edit-cust #content_div input[maxlength="10"] {
+  flex: 0 0 110px !important;
+  width: 110px !important;
+}
+body.asc-edit-cust #content_div input[style*="width:50px"],
+body.asc-edit-cust #content_div input[style*="width: 50px"] {
+  flex: 0 0 64px !important;
+  width: 64px !important;
+}
+body.asc-edit-cust #content_div input[placeholder*="Google Places"] {
+  flex: 1 1 100% !important;
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+body.asc-edit-cust #content_div .asc-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+body.asc-edit-cust #content_div .asc-phone::before,
+body.asc-edit-cust #content_div .asc-phone .asc-dash {
+  color: var(--asc-border-strong);
+  font-weight: 700;
+}
+body.asc-edit-cust #content_div .btn.btn-small,
+body.asc-edit-cust #content_div .btn-small {
+  min-height: 30px;
+  padding: 3px 9px;
+}
+body.asc-edit-cust #content_div .ajax__combobox_inputcontainer {
+  width: 100% !important;
+  max-width: 320px;
+}
+body.asc-edit-cust #content_div .ajax__combobox_inputcontainer input[type="text"] {
+  width: 100% !important;
+}
+body.asc-edit-cust #content_div #c_job_order_source {
+  flex: 1 1 200px;
+  display: block !important;
+}
+body.asc-edit-cust #content_div .msg {
+  font-size: 12px;
+  color: var(--asc-danger);
+}
+
+/* Radio group at the top (Residential / Commercial) */
+body.asc-edit-cust #content_div #content_c_co {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+/* Right column: job list + notes + buttons */
+body.asc-edit-cust #content_div #content_p_jo_ids_list table {
+  width: 100%;
+  border: 1px solid var(--asc-border);
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  margin-bottom: 14px;
+}
+body.asc-edit-cust #content_div #content_p_jo_ids_list table td,
+body.asc-edit-cust #content_div #content_p_jo_ids_list table th {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--asc-border);
+  vertical-align: middle;
+}
+body.asc-edit-cust #content_div #content_p_jo_ids_list table tr:last-child td { border-bottom: 0; }
+body.asc-edit-cust #content_div #content_p_jo_ids_list table th,
+body.asc-edit-cust #content_div #content_p_jo_ids_list table b {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--asc-muted);
+  font-weight: 700;
+}
+body.asc-edit-cust #content_div #content_p_jo_ids_list table a {
+  color: var(--asc-accent);
+  font-weight: 600;
+}
+body.asc-edit-cust #content_div textarea {
+  width: 100% !important;
+  max-width: none !important;
+  margin-bottom: 4px;
+}
+body.asc-edit-cust #content_div label.desc + br { display: none; }
+body.asc-edit-cust #content_div #content_p_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--asc-border);
+}
+body.asc-edit-cust #content_div #content_p_buttons input[type="submit"] {
+  margin: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   jo_details.aspx — job details
+   -------------------------------------------------------------------------- */
+body.asc-jo #content_div .card {
+  overflow: hidden;
+}
+body.asc-jo #content_div .card > header.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 8px 14px !important;
+}
+body.asc-jo #content_div .card > header.card-header h6 {
+  font-size: 14px !important;
+  font-weight: 650;
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+body.asc-jo #content_div .card > header.card-header .media {
+  flex: 1 1 auto;
+  align-items: center;
+}
+body.asc-jo #content_div .card > header.card-header .pull-right {
+  order: 2;
+  margin-left: auto;
+}
+body.asc-jo #content_div .card > header.card-header .pull-right a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  color: var(--asc-muted) !important;
+}
+body.asc-jo #content_div .card > header.card-header .pull-right a:hover { background: #e2e8f0; color: var(--asc-text-strong) !important; }
+body.asc-jo #content_div .card > header.card-header .pull-right svg { width: 14px; height: 14px; }
+
+/* customer summary block */
+body.asc-jo #content_div .card > .row.g-pa-15 {
+  padding: 14px 16px 6px !important;
+  line-height: 1.5;
+}
+body.asc-jo #content_div .card > .row.g-pa-15 > div {
+  margin-bottom: 8px !important;
+}
+body.asc-jo #content_div #content_l_name {
+  font-weight: 650;
+  font-size: 14px;
+  color: var(--asc-text-strong);
+}
+body.asc-jo #content_div #content_l_c_add1,
+body.asc-jo #content_div #content_l_c_phone,
+body.asc-jo #content_div #content_l_c_job_order_source {
+  color: var(--asc-muted);
+}
+body.asc-jo #content_div #content_l_c_phone a { color: var(--asc-accent); font-weight: 500; }
+
+/* action button rows (Customer / Payments / … and Renumber / Duplicate / …) */
+body.asc-jo #content_div .row.noprint,
+body.asc-jo #content_div .row.g-pl-30 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 6px 16px !important;
+}
+body.asc-jo #content_div .row.noprint > input[type="submit"],
+body.asc-jo #content_div .row.g-pl-30 > input[type="submit"] {
+  margin: 0 !important;
+  min-height: 28px;
+  padding: 3px 10px;
+  font-size: 12px;
+  background: #fff !important;
+  border-color: var(--asc-border-strong) !important;
+  color: var(--asc-text-strong) !important;
+}
+body.asc-jo #content_div .row.noprint > input[type="submit"]:hover,
+body.asc-jo #content_div .row.g-pl-30 > input[type="submit"]:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+body.asc-jo #content_div input.btn_has_content,
+body.asc-jo #content_div input[type="submit"][style*="16a616"] {
+  border-color: #bbf7d0 !important;
+  background: #f0fdf4 !important;
+  color: #166534 !important;
+}
+body.asc-jo #content_div input[type="submit"][value=""] { display: none; }
+
+/* Special instructions */
+body.asc-jo #content_div #content_lb_special_instructions {
+  font-weight: 650;
+  color: var(--asc-accent-strong) !important;
+}
+
+/* Terms / Status / Pipeline / Letterhead selects */
+body.asc-jo #content_div #content_ctl01 > .row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 4px 16px 12px !important;
+}
+body.asc-jo #content_div #content_ctl01 > .row > div {
+  flex: none !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--asc-muted);
+}
+body.asc-jo #content_div #content_ctl01 > .row select {
+  width: 100% !important;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Accordion "Job Information" */
+body.asc-jo #content_div .u-accordion__header a {
+  font-weight: 650;
+  color: var(--asc-text-strong) !important;
+}
+
+/* Customer card and schedule card side by side: same height */
+body.asc-jo #content_div .print_left,
+body.asc-jo #content_div .print_right {
+  display: flex;
+  flex-direction: column;
+}
+body.asc-jo #content_div .print_left > .card,
+body.asc-jo #content_div .print_right > .card {
+  flex: 1 1 auto;
+  min-height: 100%;
+}
+body.asc-jo #content_div .print_right .card {
+  max-height: none !important;
+  display: flex;
+  flex-direction: column;
+}
+body.asc-jo #content_div .print_right .card > .table-responsive {
+  flex: 1 1 auto;
+  display: block !important;
+  overflow: auto;
+}
+body.asc-jo #content_div .table-schedule {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+body.asc-jo #content_div .table-schedule th {
+  background: #f8fafc !important;
+  color: var(--asc-muted) !important;
+}
+
+/* Job board + items table */
+body.asc-jo #content_div #content_pl_job_board table {
+  margin: 0 0 8px !important;
+}
+body.asc-jo #content_div .table-responsive2 {
+  overflow-x: auto;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  background: #fff;
+}
+body.asc-jo #content_div .g-brd-gray-light-v7.g-bg-white.g-rounded-4 {
+  border: 0 !important;
+  background: transparent !important;
+}
+body.asc-jo #content_div #item_tbl {
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+body.asc-jo #content_div #item_tbl thead#header-hidden { display: none; }
+body.asc-jo #content_div #item_tbl thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  text-align: center;
+}
+body.asc-jo #content_div #item_tbl td.tdji,
+body.asc-jo #content_div #item_tbl th.tdji {
+  padding: 6px 8px !important;
+}
+body.asc-jo #content_div #item_tbl tr[style] > td {
+  background: transparent !important;
+}
+body.asc-jo #content_div #item_tbl tr.child-0:nth-child(even) > td { background: var(--asc-row-alt); }
+body.asc-jo #content_div #item_tbl tr:hover > td { background: var(--asc-row-hover) !important; }
+body.asc-jo #content_div #item_tbl b { font-weight: 700; color: var(--asc-text-strong); }
+body.asc-jo #content_div #item_tbl a { font-weight: 600; }
+
+/* Status badge next to the Job ID header (added by jobs.js) */
+.asc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px 0 7px;
+  border-radius: 999px;
+  border: 1px solid var(--b-border, #e2e8f0);
+  background: var(--b-bg, #f1f5f9);
+  color: var(--b-fg, #334155);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.asc-status-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--b-dot, currentColor); }
+.asc-status-pill[data-status="lead"]          { --b-bg: #f1f5f9; --b-border: #e2e8f0; --b-fg: #475569; --b-dot: #94a3b8; }
+.asc-status-pill[data-status="estimate"]      { --b-bg: #fef3c7; --b-border: #fde68a; --b-fg: #92400e; --b-dot: #f59e0b; }
+.asc-status-pill[data-status="quote"]         { --b-bg: #dbeafe; --b-border: #bfdbfe; --b-fg: #1e40af; --b-dot: #3b82f6; }
+.asc-status-pill[data-status="esigned"]       { --b-bg: #ede9fe; --b-border: #ddd6fe; --b-fg: #5b21b6; --b-dot: #8b5cf6; }
+.asc-status-pill[data-status="undercontract"] { --b-bg: #e0e7ff; --b-border: #c7d2fe; --b-fg: #3730a3; --b-dot: #6366f1; }
+.asc-status-pill[data-status="holding"]       { --b-bg: #ffedd5; --b-border: #fed7aa; --b-fg: #9a3412; --b-dot: #f97316; }
+.asc-status-pill[data-status="installation"]  { --b-bg: #ccfbf1; --b-border: #99f6e4; --b-fg: #115e59; --b-dot: #14b8a6; }
+.asc-status-pill[data-status="wip"],
+.asc-status-pill[data-status="workinprogress"]{ --b-bg: #cffafe; --b-border: #a5f3fc; --b-fg: #155e75; --b-dot: #06b6d4; }
+.asc-status-pill[data-status="billing"]       { --b-bg: #ecfccb; --b-border: #d9f99d; --b-fg: #3f6212; --b-dot: #84cc16; }
+.asc-status-pill[data-status="billed"]        { --b-bg: #dcfce7; --b-border: #bbf7d0; --b-fg: #166534; --b-dot: #22c55e; }
+.asc-status-pill[data-status="finished"]      { --b-bg: #d1fae5; --b-border: #a7f3d0; --b-fg: #065f46; --b-dot: #059669; }
+.asc-status-pill[data-status="cancelled"]     { --b-bg: #fee2e2; --b-border: #fecaca; --b-fg: #991b1b; --b-dot: #ef4444; }
+.asc-status-pill[data-status="lostjob"]       { --b-bg: #ffe4e6; --b-border: #fecdd3; --b-fg: #9f1239; --b-dot: #f43f5e; }
+
+/* Bottom button bar */
+body.asc-jo #content_div .row.noprint > .col-sm-12 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 !important;
+  max-width: none !important;
+}
+}

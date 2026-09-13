@@ -1,0 +1,141 @@
+/* ==========================================================================
+   TintPro Restyle — pages/inbox.css
+   Inbox / Sent Items (cust_contact_list.aspx, cust_contact_sent.aspx)
+   ========================================================================== */
+
+/* Everything below is disabled on pages the gate marks off (see common/gate.js) */
+html:not(.asc-off) {
+/* Tabs */
+body.asc-inbox #content_div ul.nav.u-nav-v1-2 {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin: 0 0 14px !important;
+  border: 1px solid var(--asc-border) !important;
+  border-radius: 10px;
+  background: #fff;
+}
+body.asc-inbox #content_div ul.nav.u-nav-v1-2 .nav-link {
+  border: 0 !important;
+  border-radius: 7px !important;
+  padding: 6px 14px !important;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--asc-muted) !important;
+  background: transparent !important;
+}
+body.asc-inbox #content_div ul.nav.u-nav-v1-2 .nav-link:hover { color: var(--asc-text-strong) !important; background: #f1f5f9 !important; }
+body.asc-inbox #content_div ul.nav.u-nav-v1-2 .nav-link.active {
+  background: var(--asc-nav-bg) !important;
+  color: #fff !important;
+}
+
+/* Filter row */
+body.asc-inbox #content_div .asc-inbox-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 14px;
+  margin: 0 0 12px;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+}
+body.asc-inbox #content_div .asc-inbox-filters .asc-tool-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+body.asc-inbox #content_div .asc-inbox-filters .asc-tool-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--asc-muted);
+}
+body.asc-inbox #content_div .asc-inbox-filters input.custom-select {
+  width: 130px !important;
+  background-image: none !important;
+  padding-right: 10px !important;
+  cursor: text;
+}
+body.asc-inbox #content_div .asc-inbox-filters input[type="submit"] { margin: 0 !important; }
+body.asc-inbox #content_div .asc-inbox-filters .asc-tool-spacer { flex: 1 1 auto; }
+
+/* Grid */
+body.asc-inbox #content_div .asc-grid-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+}
+body.asc-inbox #content_div #content_GridView1 {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  color: var(--asc-text) !important;
+  font-size: 13px;
+}
+body.asc-inbox #content_div #content_GridView1 > tbody > tr { background: transparent !important; color: inherit !important; }
+body.asc-inbox #content_div #content_GridView1 > tbody > tr > th {
+  padding: 9px 12px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid var(--asc-border);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--asc-muted) !important;
+  text-align: left;
+  white-space: nowrap;
+}
+body.asc-inbox #content_div #content_GridView1 > tbody > tr > th a { color: inherit !important; text-decoration: none !important; }
+body.asc-inbox #content_div #content_GridView1 > tbody > tr > td {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--asc-border);
+  vertical-align: middle !important;
+  background: #fff;
+  line-height: 1.4;
+}
+body.asc-inbox #content_div #content_GridView1 > tbody > tr:nth-child(odd) > td { background: var(--asc-row-alt); }
+body.asc-inbox #content_div #content_GridView1 > tbody > tr:hover > td { background: var(--asc-row-hover); }
+body.asc-inbox #content_div #content_GridView1 > tbody > tr:last-child > td { border-bottom: 0; }
+body.asc-inbox #content_div #content_GridView1 td a { color: var(--asc-accent) !important; font-weight: 500; text-decoration: none !important; }
+body.asc-inbox #content_div #content_GridView1 td a:hover { text-decoration: underline !important; }
+/* action links → buttons */
+body.asc-inbox #content_div #content_GridView1 td a[data-modal-target],
+body.asc-inbox #content_div #content_GridView1 td a[href*="resend_cc_id"] {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--asc-border-strong);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--asc-text-strong) !important;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+body.asc-inbox #content_div #content_GridView1 td a[data-modal-target] {
+  background: var(--asc-accent);
+  border-color: var(--asc-accent);
+  color: #fff !important;
+}
+body.asc-inbox #content_div #content_GridView1 td a[data-modal-target]:hover { background: var(--asc-accent-strong); text-decoration: none !important; }
+body.asc-inbox #content_div #content_GridView1 td a[href*="resend_cc_id"]:hover { background: #f8fafc; text-decoration: none !important; }
+body.asc-inbox #content_div #content_GridView1 td.asc-subject { font-weight: 600; color: var(--asc-text-strong); }
+body.asc-inbox #content_div #content_GridView1 td.asc-date { white-space: nowrap; color: var(--asc-muted); font-variant-numeric: tabular-nums; }
+body.asc-inbox #content_div #content_GridView1 td.asc-id { font-family: var(--asc-mono); font-size: 12px; color: var(--asc-muted); }
+
+/* Modal holding the message iframe */
+#m_go { width: min(96vw, 860px) !important; max-width: 860px !important; padding: 16px 16px 12px !important; }
+#m_go iframe#frmGo { width: 100% !important; height: min(80vh, 720px) !important; }
+
+/* the black rule the page draws above the grid */
+body.asc-inbox #content_div .col-lg-12 > div[style*="border-bottom"] { display: none; }
+}

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   TintPro Restyle — pages/settings-home.css   (/trunk/admin/welcome.aspx)
+   ========================================================================== */
+html:not(.asc-off) {
+body.asc-settings-home {
+  margin: 0;
+  padding: 20px 24px 40px !important;
+  background: var(--asc-bg) !important;
+  font-family: var(--asc-font) !important;
+  color: var(--asc-text);
+}
+body.asc-settings-home form {
+  background: transparent !important;
+  color: inherit !important;
+  font: inherit !important;
+}
+body.asc-settings-home #l_errmsg { display: block; margin-bottom: 8px; }
+.asc-settings-home h1 {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  color: var(--asc-text-strong);
+  margin: 0 0 4px;
+}
+.asc-settings-lead { margin: 0 0 18px; color: var(--asc-muted); font-size: 13px; font-weight: 400; }
+.asc-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.asc-settings-card {
+  background: #fff;
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius);
+  box-shadow: var(--asc-shadow);
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.asc-settings-card header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.asc-settings-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--asc-accent-soft);
+  color: var(--asc-accent-strong);
+  flex: none;
+}
+.asc-settings-icon svg { width: 16px; height: 16px; }
+.asc-settings-card h2 { font-size: 14px; font-weight: 650; margin: 0; color: var(--asc-text-strong); }
+.asc-settings-card ul { list-style: none; margin: 0; padding: 0; }
+.asc-settings-card li a {
+  display: block;
+  padding: 6px 8px;
+  margin: 0 -8px;
+  border-radius: 7px;
+  color: var(--asc-text) !important;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+.asc-settings-card li a:hover { background: var(--asc-row-hover); color: var(--asc-accent-strong) !important; }
+}

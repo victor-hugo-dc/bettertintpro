@@ -1,0 +1,216 @@
+{
+  "manifest_version": 3,
+  "name": "TintPro Restyle",
+  "version": "0.4.1",
+  "description": "A cleaner, colour-coded layout for the TintPro app: dashboard, calendar, jobs, inbox, settings and exportable reports.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/*"
+      ],
+      "js": [
+        "common/gate.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/*"
+      ],
+      "js": [
+        "common/page-world.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/*"
+      ],
+      "css": [
+        "common/common.css",
+        "common/shell.css"
+      ],
+      "js": [
+        "common/icons.js",
+        "common/common.js",
+        "common/export.js",
+        "common/shell.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/welcome/*"
+      ],
+      "exclude_matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/welcome/dashboard.aspx*"
+      ],
+      "css": [
+        "pages/welcome.css"
+      ],
+      "js": [
+        "pages/welcome.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/welcome/dashboard.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/calendar/calendar.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/calendar/calendar_one.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/calendar/calendar_mo.aspx*"
+      ],
+      "css": [
+        "pages/schedule.css"
+      ],
+      "js": [
+        "pages/schedule.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/edit_cust.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/jo_details.aspx*"
+      ],
+      "css": [
+        "pages/jobs.css"
+      ],
+      "js": [
+        "pages/jobs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/cust_contact_sent.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/cust_contact_list.aspx*"
+      ],
+      "css": [
+        "pages/inbox.css"
+      ],
+      "js": [
+        "pages/inbox.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/cust_contact_display.aspx*"
+      ],
+      "css": [
+        "pages/message.css"
+      ],
+      "js": [
+        "pages/message.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/admin/referrals.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/employees.aspx*"
+      ],
+      "css": [
+        "pages/admin.css"
+      ],
+      "js": [
+        "pages/admin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/admin/*",
+        "https://atlanticsun.tintprogroup.com/trunk/ar/*",
+        "https://atlanticsun.tintprogroup.com/trunk/claims/*",
+        "https://atlanticsun.tintprogroup.com/Inv/*",
+        "https://atlanticsun.tintprogroup.com/inv/*"
+      ],
+      "exclude_matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/admin/referrals.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/employees.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/?*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/default.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/admin_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/admin/welcome.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/ar/menu_ar.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/ar/default_ar.aspx*",
+        "https://atlanticsun.tintprogroup.com/Inv/T_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/Inv/start_admin.aspx*",
+        "https://atlanticsun.tintprogroup.com/inv/T_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/inv/start_admin.aspx*"
+      ],
+      "css": [
+        "pages/reports.css"
+      ],
+      "js": [
+        "pages/reports.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/admin/admin_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/Inv/T_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/inv/T_menu.aspx*",
+        "https://atlanticsun.tintprogroup.com/trunk/ar/menu_ar.aspx*"
+      ],
+      "css": [
+        "pages/menus.css"
+      ],
+      "js": [
+        "pages/menus.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/trunk/admin/welcome.aspx*"
+      ],
+      "css": [
+        "pages/settings-home.css"
+      ],
+      "js": [
+        "pages/settings-home.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://atlanticsun.tintprogroup.com/payroll/*"
+      ],
+      "css": [
+        "pages/reports.css"
+      ],
+      "js": [
+        "pages/cssonly.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tintpro-restyle@victor.local",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  }
+}
